@@ -1,37 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Flex, Text, Select, Box } from '@chakra-ui/react';
 
+export interface BasicInformationProps {
+    selectedMake: string;
+    selectedModel: string;
+    selectedYear: string;
+    onMakeChange: (make: string) => void;
+    onModelChange: (model: string) => void;
+    onYearChange: (year: string) => void;
+}
 
-const BasicInformation = () => {
-    const [selectedMake, setSelectedMake] = useState('');
-    const [selectedModel, setSelectedModel] = useState('');
-    const [selectedYear, setSelectedYear] = useState('');
-
-    const handleMakeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedMake(event.target.value);
-    };
-    const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedModel(event.target.value);
-    };
-    const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedYear(event.target.value);
-    };
-
+const BasicInformation: React.FC<BasicInformationProps> = ({ selectedMake, selectedModel, selectedYear, onMakeChange, onModelChange, onYearChange }) => {
+    
     return (
-        <Flex 
-        flexDirection="column"
-        gap={30}
-        alignItems="center"
- >
-<form>
-        <Flex gap={30}>
+        <Flex flexDirection="column" gap={30} alignItems="center">
             <Box>
                 <Text>Select a Make</Text>
                 <Select
                     value={selectedMake}
-                    onChange={handleMakeChange}
-                    height={"45px"}
-                    style={{ width: "30vw", maxWidth: "300px" }}
+                    onChange={(e) => onMakeChange(e.target.value)}
+                    height="45px"
+                    style={{ width: '30vw', maxWidth: '300px' }}
                 >
                     <option value="Make1">Make 1</option>
                     <option value="Make2">Make 2</option>
@@ -42,33 +31,30 @@ const BasicInformation = () => {
                 <Text>Select a Model</Text>
                 <Select
                     value={selectedModel}
-                    onChange={handleModelChange}
-                    height={"45px"}
-                    style={{ width: "30vw", maxWidth: "300px" }}
+                    onChange={(e) => onModelChange(e.target.value)} 
+                    height="45px"
+                    style={{ width: '30vw', maxWidth: '300px' }}
                 >
                     <option value="Model1">Model 1</option>
                     <option value="Model2">Model 2</option>
                     <option value="Model3">Model 3</option>
                 </Select>
             </Box>
-           
-        </Flex>
-        <Box>
+            <Box>
                 <Text>Select a Year</Text>
                 <Select
                     value={selectedYear}
-                    onChange={handleYearChange}
-                    height={"45px"}
-                    style={{ width: "30vw", maxWidth: "300px" }}
+                    onChange={(e) => onYearChange(e.target.value)} 
+                    height="45px"
+                    style={{ width: '30vw', maxWidth: '300px' }}
                 >
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
                     <option value="2021">2021</option>
                 </Select>
             </Box>
-        
-            </form>
-        </Flex>    );
+        </Flex>
+    );
 };
 
 export default BasicInformation;

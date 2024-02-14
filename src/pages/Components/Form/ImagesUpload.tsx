@@ -3,8 +3,16 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import UploadIcon from "../../../../public/UploadIcon.png";
 
+
+export interface imagesProps {
+    images: File[];
+    setImages: React.Dispatch<React.SetStateAction<File[]>>;
+} 
+
+
 const ImagesUpload = () => {
     const [images, setImages] = useState<File[]>([]);
+
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = e.target.files;
@@ -45,6 +53,7 @@ const ImagesUpload = () => {
 
     return (
         <Flex direction="column" alignItems="center" justifyContent="center" padding=".6rem">
+            <form>
             <Flex
                 width="100%"
                 minWidth="50%"
@@ -92,6 +101,7 @@ const ImagesUpload = () => {
                     </Flex>
                 ))}
             </Flex>
+            </form>
         </Flex>
     );
 };
